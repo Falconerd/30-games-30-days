@@ -72,11 +72,10 @@ public class Player : MonoBehaviour
     RaycastHit2D hit;
     float rayLength;
 
-    // Up (top left)
+    // Up
     rayLength = Mathf.Abs(velocity.y) + skinWidth;
-    hit = Physics2D.Raycast(new Vector2(left, top), Vector2.up, rayLength, collisionMask);
-    Debug.DrawRay(new Vector2(left, top), Vector2.up * rayLength, Color.yellow, Time.deltaTime);
-
+    Vector2[] topOrigins = { new Vector2(left, top), new Vector2(right, top) };
+    hit = CastMultiple(topOrigins, Vector2.up, rayLength, collisionMask);
     if (hit)
     {
       collisions.up = true;
@@ -84,8 +83,8 @@ public class Player : MonoBehaviour
     }
 
     // Down
-    hit = Physics2D.Raycast(new Vector2(left, bottom), Vector2.down, rayLength, collisionMask);
-    Debug.DrawRay(new Vector2(left, bottom), Vector2.down * rayLength, Color.yellow, Time.deltaTime);
+    Vector2[] bottomOrigins = { new Vector2(left, bottom), new Vector2(right, bottom) };
+    hit = CastMultiple(bottomOrigins, Vector2.down, rayLength, collisionMask);
 
     // Make sure we can jump
     if (hit && velocity.y < 0)
@@ -96,8 +95,8 @@ public class Player : MonoBehaviour
 
     // Left
     rayLength = Mathf.Abs(velocity.x) + skinWidth;
-    hit = Physics2D.Raycast(new Vector2(left, top), Vector2.left, rayLength, collisionMask);
-    Debug.DrawRay(new Vector2(left, top), Vector2.left * rayLength, Color.yellow, Time.deltaTime);
+    Vector2[] leftOrigins = { new Vector2(left, bottom), new Vector2(left, top) };
+    hit = CastMultiple(leftOrigins, Vector2.left, rayLength, collisionMask);
 
     // Make sure we don't get stuck to walls
     if (hit && velocity.x < 0)
@@ -107,8 +106,8 @@ public class Player : MonoBehaviour
     }
 
     // Right
-    hit = Physics2D.Raycast(new Vector2(right, top), Vector2.right, rayLength, collisionMask);
-    Debug.DrawRay(new Vector2(right, top), Vector2.right * rayLength, Color.yellow, Time.deltaTime);
+    Vector2[] rightOrigins = { new Vector2(right, bottom), new Vector2(right, top) };
+    hit = CastMultiple(rightOrigins, Vector2.right, rayLength, collisionMask);
 
     // Make sure we don't get stuck to walls
     if (hit && velocity.x > 0)
@@ -118,10 +117,21 @@ public class Player : MonoBehaviour
     }
   }
 
+  RaycastHit2D CastMultiple(Vector2[] origins, Vector2 direction, float rayLength, LayerMask collisionMask)
+  {
+    var hit = new RaycastHit2D();
+    for (int i = 0; i < origins.Length; i++)
+    {
+      hit = Cast(origins[i], direction, rayLength, collisionMask);
+      if (hit) return hit;
+    }
+    return hit;
+  }
+
   RaycastHit2D Cast(Vector2 origin, Vector2 direction, float rayLength, LayerMask collisionMask)
   {
     RaycastHit2D hit = Physics2D.Raycast(origin, direction, rayLength, collisionMask);
-    Debug.DrawRay(origin, direction * rayLength, Color.yellow, Time.deltaTime);
+    Debug.DrawRay(origin, direction * rayLength, Color.red, Time.deltaTime);
     return hit;
   }
 
