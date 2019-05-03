@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Destructible
+  - Collision
   layers:
   - Default
   - TransparentFX
@@ -13,10 +16,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Destructible
+  - Collision
+  - Enemy
+  - Bomb
   - 
   - 
   - 

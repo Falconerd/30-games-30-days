@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D other)
   {
-    // If we collide with a tile, we need to move back to the edge of the tile.
-    // Couldn't we just let the physics in game handle this??
+    if (other.gameObject.tag == "Enemy")
+      GameObject.Find("_GM").GetComponent<GameManager>().HandleCompleteLevel();
   }
 }

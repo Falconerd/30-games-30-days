@@ -9,9 +9,11 @@ public class PlaceBomb : MonoBehaviour
 
   float cooldownClock;
 
+  GameManager gameManager;
+
   void Start()
   {
-
+    gameManager = GameObject.Find("_GM").GetComponent<GameManager>();
   }
 
   void Update()
@@ -60,7 +62,8 @@ public class PlaceBomb : MonoBehaviour
             y += 0.5f;
         }
       }
-      Instantiate(bombPrefab, new Vector3(x, y, 0), Quaternion.identity);
+      GameObject bomb = Instantiate(bombPrefab, new Vector3(x, y, 0), Quaternion.identity);
+      bomb.GetComponent<Bomb>().Setup(gameManager);
     }
 
     cooldownClock -= Time.deltaTime;
