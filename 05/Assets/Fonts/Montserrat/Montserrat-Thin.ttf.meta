@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: e67997b9337cd5444972fd0431b8cfb3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Montserrat Thin
+  fontNames:
+  - Montserrat Thin
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a6d746f103783cb40a0e291d15c0f64b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
