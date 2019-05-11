@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     internal Vector2 ScrollDirection = Vector2.down;
     [Header("Difficulty Settings")]
     [SerializeField]
-    private int difficultIncreasesEvery = 5;
+    private int _difficultIncreasesEvery = 5;
     [SerializeField]
     internal float ScrollSpeed = 1.5f;
     [SerializeField]
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         get { return _gameOver; }
     }
     private int score = 0;
+    internal int DifficultyIncreasesEvery { get { return _difficultIncreasesEvery; } }
     [SerializeField]
     private ObjectPool objectPool;
     private GameObject lastObject;
@@ -58,7 +60,7 @@ public class GameManager : MonoBehaviour
         lastObject = gameObject;
         score++;
         scoreText.text = score.ToString();
-        if (score % difficultIncreasesEvery == 0)
+        if (score % _difficultIncreasesEvery == 0)
         {
             objectPool.SpawnRate -= spawnRateReduction;
             if (objectPool.SpawnRate < minSpawnRate)
@@ -73,6 +75,10 @@ public class GameManager : MonoBehaviour
     internal void PlayerDied()
     {
         _gameOver = true;
+        AnalyticsEvent.Custom("PlayerDied", new Dictionary<string, object> {
+            { "score", score },
+            { "time_elapsed", Time.timeSinceLevelLoad }
+        });
         // GetComponent<AudioSource>().Play();
         gameOverUI.SetActive(true);
     }

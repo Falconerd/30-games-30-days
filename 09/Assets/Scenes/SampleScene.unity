@@ -381,6 +381,7 @@ MonoBehaviour:
   SpawnRate: 2
   minimumObjectPosition: -3
   maximumObjectPosition: 3
+  speedIncreaseTime: 4
 --- !u!114 &648058280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +397,7 @@ MonoBehaviour:
   scoreText: {fileID: 545835608}
   gameOverUI: {fileID: 2058600244}
   ScrollDirection: {x: 0, y: -1}
-  difficultIncreasesEvery: 5
+  _difficultIncreasesEvery: 5
   ScrollSpeed: 6
   maxScrollSpeed: 12
   minSpawnRate: 0.7
@@ -995,7 +996,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -3, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.05
 --- !u!58 &1224269929
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1011,7 +1012,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 3, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.05
 --- !u!50 &1224269930
 Rigidbody2D:
   serializedVersion: 4

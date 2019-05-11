@@ -23,6 +23,10 @@ public class ObjectPool : MonoBehaviour
     private float spawnDistance = 15;
     private int currentObjectIndex = 0;
 
+    [SerializeField, Tooltip("The amount of time between objects when speed is increased")]
+    private float speedIncreaseTime = 4;
+    private float speedIncreaseClock = 0;
+
     void Start()
     {
         objects = new GameObject[objectPoolSize * objectPrefabs.Length];
@@ -49,9 +53,12 @@ public class ObjectPool : MonoBehaviour
     void Update()
     {
         timeSinceLastSpawned += Time.deltaTime;
+        speedIncreaseClock -= Time.deltaTime;
 
-        if (!GameManager.instance.GameOver && timeSinceLastSpawned >= SpawnRate)
+        if (!GameManager.instance.GameOver && timeSinceLastSpawned >= SpawnRate && speedIncreaseClock <= 0)
         {
+            if ((currentObjectIndex + 1) % GameManager.instance.DifficultyIncreasesEvery == 0)
+                speedIncreaseClock = speedIncreaseTime;
             var direction = GameManager.instance.ScrollDirection;
             timeSinceLastSpawned = 0;
             var swappedVector = new Vector2(direction.y, direction.x);
