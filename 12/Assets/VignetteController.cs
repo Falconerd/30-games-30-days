@@ -13,17 +13,17 @@ public class VignetteController : MonoBehaviour
     {
         player = GameObject.Find("Player");
         vignette = ScriptableObject.CreateInstance<Vignette>();
+        // Color color = new Color(31, 25, 41);
         vignette.enabled.Override(true);
+        // vignette.color.Override(color);
         vignette.intensity.Override(1f);
 
         volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        vignette.intensity
-        .Override(player.transform.position.y / 40);
+        vignette.intensity.Override(-player.transform.position.y / 80);
     }
 }

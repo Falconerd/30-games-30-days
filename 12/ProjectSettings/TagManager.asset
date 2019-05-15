@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Water
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -16,8 +16,8 @@ TagManager:
   - 
   - PlayerBullets
   - Player
-  - 
-  - 
+  - Enemy
+  - EnemyBullets
   - 
   - 
   - 

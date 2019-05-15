@@ -9,18 +9,21 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField]
     private float _cooldown = 0;
     internal float Cooldown { get { return _cooldown; } set { _cooldown = value; } }
-
     [SerializeField]
-    Transform forwardGunTransform;
+    private Transform forwardGunTransform;
     [SerializeField]
-    Transform torpedoTransform1;
+    private Transform torpedoTransform1;
     [SerializeField]
-    Transform torpedoTransform2;
+    private Transform torpedoTransform2;
+    private float cooldownClock = 0;
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && _cooldown <= 0)
+        cooldownClock -= Time.deltaTime;
+
+        if (Input.GetButton("Fire1") && cooldownClock <= 0)
         {
+            cooldownClock = _cooldown;
             if (weapon != null)
             {
                 var go = Instantiate(weapon, transform.position, transform.rotation);

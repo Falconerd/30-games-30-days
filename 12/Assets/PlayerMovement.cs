@@ -48,9 +48,7 @@ public class PlayerMovement : MonoBehaviour
             var rotationSpeed = Input.GetButton("Jump") ? standardRotationSpeed : stalledRotationSpeed;
             transform.Rotate(Vector3.back, horizontalInput * rotationSpeed, Space.Self);
             // We need to rotate the rotator transform on the X axis based on the z rotation
-            // rotator.transform.Rotate(Vector3.right, horizontalInput * rotationSpeed, Space.Self);
             var newRotation = Quaternion.Euler(transform.rotation.eulerAngles.z, 0, 0);
-            // var rotation = Quaternion.Euler(transform.rotation.eulerAngles.z, transform.rotation.eulerAngles.);
             rotator.localRotation = newRotation;
         }
 
