@@ -36,11 +36,13 @@ public class WeaponStraightShot : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "Enemy") {
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
             Debug.Log("Yup : " + other.gameObject.name);
             // Damage thine enemies
-            other.GetComponent<Enemy>().ReceiveDamage(2f);
+            other.GetComponent<Health>().Decrease(2f);
         }
     }
 }

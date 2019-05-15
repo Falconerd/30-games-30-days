@@ -24,6 +24,7 @@ public class VignetteController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vignette.intensity.Override(-player.transform.position.y / 80);
+        if (player != null)
+            vignette.intensity.Override(-player.transform.position.y / 80);
     }
 }
