@@ -11,6 +11,13 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private float spawnTime = 3;
     private float spawnClock = 0;
+    [SerializeField]
+    private float difficultyTime = 15;
+    private float difficultyClock = 0;
+    [SerializeField]
+    private float spawnTimeModifier = 0.5f;
+    [SerializeField]
+    private float minSpawnTime = 0.5f;
 
     internal List<GameObject> Enemies = new List<GameObject>();
     internal static SpawnManager instance;
@@ -22,7 +29,17 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.IsDead) return;
         spawnClock -= Time.deltaTime;
+        difficultyClock -= Time.deltaTime;
+
+        if (difficultyClock <= 0)
+        {
+            difficultyClock = difficultyTime;
+            spawnTime -= spawnTimeModifier;
+            if (spawnTime < minSpawnTime)
+                spawnTime = minSpawnTime;
+        }
 
         if (spawnClock <= 0)
         {

@@ -6,8 +6,6 @@ public class StandardEnemyDeath : MonoBehaviour, IDeath
 {
     public void OnDeath()
     {
-        // Update the score
-        Destroy(gameObject);
-        // Destroy self
+        SpawnManager.instance.Despawn(gameObject);
     }
 }

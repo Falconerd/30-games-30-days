@@ -7,6 +7,6 @@ public class ReverseEnemy : MonoBehaviour, IDeath
     public void OnDeath()
     {
         GameManager.instance.Player.GetComponent<PlayerRotation>().Reverse();
-        Destroy(gameObject);
+        SpawnManager.instance.Despawn(gameObject);
     }
 }

@@ -4,49 +4,41 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField]
+
+    private AudioSource killEnemySound;
+    [SerializeField]
+    private AudioSource hitSound;
     private List<GameObject> targets = new List<GameObject>();
 
     void Update()
     {
+        if (GameManager.instance.IsDead) return;
         if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
         {
-            // if (targets.Count == 0)
-            // {
-            //     // Get all active enemies...
-            //     var enemies = SpawnManager.instance.Enemies;
-            //     // Speed them up
-            //     enemies.ForEach(item => item.GetComponentInChildren<EnemyMovement>().Speed *= 2);
-            // }
-            // else
-            // {
-            //     targets.ForEach(item => item.GetComponentInChildren<Enemy>().Die());
-            // }
-            var hits = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+            var hits = Physics2D.OverlapCircleAll(transform.position, 0.75f);
             for (var i = 0; i < hits.Length; i++)
             {
-                // hits[i].gameObject.GetComponentInChildren<Death>().OnDeath();
                 if (hits[i].gameObject.GetComponent(typeof(IDeath)) != null)
                 {
                     hits[i].gameObject.SendMessage("OnDeath");
                     GameManager.instance.IncreaseScore();
+                    killEnemySound.Play();
                 }
+            }
+            if (hits.Length == 0)
+            {
+                SpawnManager.instance.Enemies.ForEach(enemy =>
+                {
+                    enemy.GetComponent<Enemy>().Speed *= 2;
+                });
+                GameManager.instance.DecreaseHealth();
+                hitSound.Play();
+            }
+            else
+            {
+                GameManager.instance.IncreaseHealth();
             }
         }
     }
-
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.tag == "Line")
-    //     {
-    //         targets.Add(other.gameObject);
-    //     }
-    // }
-
-    // void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (other.gameObject.tag == "Line")
-    //     {
-    //         targets.Remove(other.gameObject);
-    //     }
-    // }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4727800525892131215}
   - component: {fileID: 4727800525892131214}
   - component: {fileID: 4727800525892131213}
-  - component: {fileID: 4727800525892131200}
   - component: {fileID: 4727800525892131201}
   - component: {fileID: 4727800525892131202}
   m_Layer: 0
@@ -74,7 +73,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 30, y: 0, z: 1}
@@ -148,20 +147,9 @@ MonoBehaviour:
   lineEnd: {fileID: 4727800526905155827}
   enemyType: {fileID: 0}
   Speed: 3
+  maxSpeed: 12
   framesToSkip: 1
   hiddenChild: {fileID: 4727800526300174388}
---- !u!114 &4727800525892131200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4727800525892131212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c9e3ace77fc214b81e6d2e64424d4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &4727800525892131201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -291,7 +279,7 @@ GameObject:
   - component: {fileID: 4727800526905155827}
   m_Layer: 0
   m_Name: LineEnd
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

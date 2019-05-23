@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3894258129229922942}
   m_Layer: 0
   m_Name: LineEnd
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 30, y: 0, z: 1}
@@ -257,6 +257,7 @@ MonoBehaviour:
   lineEnd: {fileID: 3894258129229922942}
   enemyType: {fileID: 0}
   Speed: 3
+  maxSpeed: 12
   framesToSkip: 1
   hiddenChild: {fileID: 3894258129834982073}
 --- !u!114 &3894258129991367437
